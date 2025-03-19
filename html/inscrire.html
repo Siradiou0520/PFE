@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Inscription</title>
+    <link rel="stylesheet" href="../css/inscrire.css">
+</head>
+<body>
+    <div class="container">
+        <h2>S'inscrire</h2>
+        <form action="../php/submit.php" method="post" onsubmit="return validatePassword()">
+            <label for="nom">Nom :</label>
+            <input type="text" id="nom" name="nom" required><br/>
+
+            <label for="prenom">Prénom :</label>
+            <input type="text" id="prenom" name="prenom" required><br/>
+
+            <label>Type :</label>
+            <input type="radio" id="etudiant" name="type" value="etudiant" required onclick="toggleMatricule()"> Étudiant
+            <input type="radio" id="agent" name="type" value="agent" onclick="toggleMatricule()"> Agent<br/>
+
+            <label for="localite">Localité :</label>
+            <select name="localite" id="localite">
+                <option value="tetouan">Tétouan</option>
+                <option value="tanger">Tanger</option>
+                <option value="martil">Martil</option>
+                <option value="casablanca">Casablanca</option>
+                <option value="rabat">Rabat</option>
+            </select><br/> <br/>
+            <div id="matricule-container" class="hidden">
+                <label for="matricule">Matricule :</label>
+                <input type="text" id="matricule" name="matricule">
+            </div>
+
+            <label for="email">E-mail :</label>
+            <input type="email" id="email" name="email" required><br/>
+
+            <label for="password">Mot de passe :</label>
+            <input type="password" id="password" name="password" required><br/>
+
+            <label for="confirm">Confirmation :</label>
+            <input type="password" id="confirm" name="confirm" required oninput="checkPasswordMatch()"><br/>
+            <span id="error-message" class="error">Les mots de passe ne correspondent pas.</span>
+
+            <button type="submit">Valider</button>
+        </form>
+    </div>
+
+    <script src="../js/inscrire.js"></script>
+</body>
+</html>

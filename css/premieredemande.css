@@ -1,0 +1,46 @@
+body {
+    font-family: Arial, sans-serif;
+    text-align: center;
+    margin: 0;
+    padding: 0;
+    background-color: #f4f4f4;
+    height: 100 vh;
+}
+
+.epd {
+    background: white;
+    max-width: 400px;
+    margin: 50px auto;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+input {
+    width: 100%;
+    padding: 5px 2px;
+    margin: 10px 0;
+}
+
+button {
+    background-color: #1a9c0e;
+    color: white;
+    border: none;
+    padding: 10px;
+    cursor: pointer;
+    font-size: 1.2em;
+}
+
+button:hover {
+    background-color: darkgreen;
+    text-decoration: underline;
+}
+
+.labin {
+    display: flex;
+    flex-direction: row;
+}
+
+.labin label {
+    padding-top: 14px;
+}

@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tableau de Bord Étudiant</title>
+    <link rel="stylesheet" href="../css/style3.css">
+</head>
+<body>
+
+    <header>
+        <nav>
+            <ul>
+                <li><a href="#">Accueil</a></li>
+                <li><a href="#">Mon Profil</a></li>
+                <li><a href="#">Mes Documents</a></li>
+                <li><a href="#">Se Déconnecter</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        <section class="dashboard">
+            <h1>Bienvenue sur votre tableau de bord, Jean Dupont</h1>
+
+            <!-- Espace Notifications -->
+            <div class="notifications">
+                <p><strong>Notification:</strong> Votre demande de titre de séjour est en cours d'examen.</p>
+            </div>
+
+            <!-- Question sur le renouvellement ou la première demande -->
+            <div class="request-type">
+                <h2>Est-ce votre première demande ou souhaitez-vous renouveler votre titre de séjour ?</h2>
+                <button class="request-btn" onclick="selectFirstTime()">Première demande</button>
+                <button class="request-btn" onclick="selectRenewal()">Renouvellement</button>
+                <p id="request-status"></p>
+            </div>
+
+            <!-- Tableau des demandes -->
+            <div class="requests-table">
+                <h2>Mes Demandes</h2>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Date de la demande</th>
+                            <th>Statut</th>
+                            <th>Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>01/02/2025</td>
+                            <td>En cours d'acceptation</td>
+                            <td><button>Voir</button></td>
+                        </tr>
+                        <tr>
+                            <td>15/01/2025</td>
+                            <td>Rejetée</td>
+                            <td><button>Voir</button></td>
+                        </tr>
+                        <tr>
+                            <td>10/12/2024</td>
+                            <td>Acceptée</td>
+                            <td><button>Voir</button></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <div class="upload-section">
+                <h2>Upload de documents</h2>
+                <form id="upload-form" action="#" method="POST" enctype="multipart/form-data">
+                    <label for="file-upload">Sélectionnez un fichier:</label>
+                    <input type="file" id="file-upload" name="file-upload" required>
+                    <button type="submit" id="upload-button">Télécharger</button>
+                </form>
+                <p id="upload-status" style="color: green;"></p>
+            </div>
+
+            <div class="user-details">
+                <h2>Mes Informations</h2>
+                <p><strong>Nom:</strong> Jean Dupont</p>
+                <p><strong>Numéro d'Étudiant:</strong> 123456</p>
+                <p><strong>Statut:</strong> Étudiant</p>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <p>&copy; 2025 Plateforme de Gestion des Titres de Séjour</p>
+    </footer>
+
+    <script src="../js/scripts.js"></script>
+</body>
+</html>

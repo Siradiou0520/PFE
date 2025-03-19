@@ -1,0 +1,156 @@
+/* styles.css */
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f1f1f1;
+}
+
+header {
+    background-color: #0066cc;
+    color: white;
+    padding: 10px 0;
+    text-align: center;
+}
+
+header nav ul {
+    list-style: none;
+    padding: 0;
+}
+
+header nav ul li {
+    display: inline;
+    margin: 0 15px;
+}
+
+header nav ul li a {
+    color: white;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+main {
+    padding: 20px;
+}
+
+.dashboard {
+    max-width: 900px;
+    margin: 0 auto;
+    background-color: #fff;
+    padding: 20px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.dashboard h1 {
+    text-align: center;
+    color: #0066cc;
+}
+
+/* Notifications */
+.notifications {
+    background-color: #ffcc00;
+    color: white;
+    padding: 10px;
+    margin-bottom: 20px;
+    border-radius: 5px;
+}
+
+.notifications p {
+    margin: 0;
+}
+
+/* Type de demande */
+.request-type {
+    margin-top: 30px;
+    text-align: center;
+}
+
+.request-btn {
+    background-color: #0066cc;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    margin: 5px;
+    cursor: pointer;
+}
+
+.request-btn:hover {
+    background-color: #004fa3;
+}
+
+/* Tableau des demandes */
+.requests-table {
+    margin-top: 30px;
+    border-collapse: collapse;
+    width: 100%;
+}
+
+.requests-table th, .requests-table td {
+    border: 1px solid #ccc;
+    padding: 10px;
+    text-align: center;
+}
+
+.requests-table th {
+    background-color: #0066cc;
+    color: white;
+}
+
+.requests-table td {
+    background-color: #f9f9f9;
+}
+
+.requests-table button {
+    background-color: #0066cc;
+    color: white;
+    border: none;
+    padding: 5px 10px;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.requests-table button:hover {
+    background-color: #004fa3;
+}
+
+/* Formulaire d'upload */
+.upload-section {
+    margin-top: 30px;
+}
+
+.upload-section input[type="file"] {
+    margin-top: 10px;
+    padding: 10px;
+    border: 2px solid #ccc;
+    border-radius: 5px;
+}
+
+.upload-section button {
+    margin-top: 10px;
+    background-color: #ffcc00;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.upload-section button:hover {
+    background-color: #e6b800;
+}
+
+.user-details {
+    margin-top: 30px;
+    padding: 15px;
+    background-color: #f9f9f9;
+    border-radius: 5px;
+}
+
+footer {
+    text-align: center;
+    padding: 10px;
+    background-color: #333;
+    color: white;
+    margin-top: 20px;
+}

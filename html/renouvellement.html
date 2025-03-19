@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Première demande</title>
+    <link rel="stylesheet" href="../css/renouvellement.css">
+</head>
+<body>
+    <section class="epd">
+        <h2>Renseignez les champs suivants s'il vous plaît.</h2>
+        <form action="../php/premiere.php" method="post" enctype="multipart/form-data">
+         <div class="labin">
+         <label>Type de demande:</label>
+         <input class="type" type="radio" id="nouveau" name="demande" value="nouveau"  onclick="toggleMatricule()"> <span>Première demande</span>
+         <input class="type" type="radio" id="renouveau" name="demande" value="renouveau" required onclick="toggleMatricule()"> <span>Renouvellement</span>      
+         </div>
+         <div class="labin">
+          <label for="nom">Nom:</label>
+          <input type="text" id="nom" name="nom" required>
+         </div> 
+         <div class="labin">
+          <label for="prenom">Prénom:</label>
+          <input type="text" id="prenom" name="prenom" required>
+          </div>
+          <div class="labin">
+          <label for="naissance">Date de naissance:</label>
+          <input type="date" id="naissance" name="naissance" required>
+          </div>
+          <div class="labin">
+          <label for="ville">À:</label>
+          <input type="text" placeholder="Lieu de naissance" id="ville" name="ville" required>
+          </div>
+          <div class="labin">
+          <label for="email">Email:</label>
+          <input type="email" id="email" name="email" required>
+          </div>
+          <div class="labin">
+             <label for="adresse">Localité:</label>
+               <select class="sel" name="adresse" id="adresse">
+               <option value="tetouan">Tétouan</option>
+               <option value="tanger">Tanger</option>
+               <option value="martil">Martil</option>
+               <option value="casablanca">Casablanca</option>
+               <option value="rabat">Rabat</option>
+           </select>
+         </div><br/>
+
+         <div id="carte-container" class="hidden">
+            <label for="carte">Ancienne carte de séjour:</label>
+            <input type="file" id="carte" name="carte" required>
+         </div>
+
+         <label for="photo">Photo d'identité:</label>
+          <input type="file" id="photo" name="photo" required>
+        
+          <label for="passeport">Passeport:</label>
+          <input type="file" id="passeport" name="passeport" required>
+        
+          <label for="contrat">Justificatif de résidence ( Contrat de bail ...):</label>
+          <input type="file" id="contrat" name="contrat" required>
+       
+          <label for="certificat">Certificat médical:</label>
+          <input type="file" id="certificat" name="certificat" required>
+       
+          <label for="casier">Casier Judiciare:</label>
+          <input type="file" id="casier" name="casier" required>
+
+          <label for="scolarite">Attestation de scolarité:</label>
+          <input type="file" id="scolarite" name="scolarite" required>
+
+          <label for="bourse">Attestation de bourse:</label>
+          <input type="file" id="bourse" name="bourse" required>
+         
+          <button type="submit">Envoyer</button>
+        </form>
+    </section>
+    <script src="../js/demande.js"></script>
+</body>
+</html>
