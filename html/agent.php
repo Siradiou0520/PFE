@@ -200,7 +200,7 @@ margin-top: 20px;
             <td><?= htmlspecialchars($demande['email']) ?></td>
             <td><?= htmlspecialchars($demande['date_de_dépôt']) ?></td>
             <td id="statut-<?= $demande['demande_id'] ?>"><?= htmlspecialchars($demande['statut']) ?></td>
-            <td> <div class="td_a"> <a href="#">Voir</a> </div> </td>
+            <td> <div class="td_a"> <a href="../php/voir_documents.php?etudiant_id=<?= $demande['id'] ?>">Voir</a> </div> </td>
             <td>
                 <button onclick="updateStatus(<?= $demande['demande_id'] ?>, 'Acceptée')">Accepter</button>
                 <button onclick="updateStatus(<?= $demande['demande_id'] ?>, 'Rejetée')">Rejeter</button>

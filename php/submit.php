@@ -19,10 +19,6 @@ if (!isset($_POST['nom'], $_POST['prenom'], $_POST['email'], $_POST['password'],
     die("Tous les champs obligatoires ne sont pas remplis.");
 }
 
-// Vérification de l'email avec regex
-if (!preg_match('/^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/', $email)) {
-    die("Erreur : Adresse email invalide !");
-}
 
 // Récupération des données
 $nom = trim($_POST['nom']);
@@ -32,6 +28,11 @@ $password = password_hash($_POST['password'], PASSWORD_DEFAULT);
 $type = $_POST['type'];
 $localite = trim($_POST['localite']);
 $matricule = isset($_POST['matricule']) && !empty($_POST['matricule']) ? trim($_POST['matricule']) : NULL;
+
+// Vérification de l'email avec regex
+if (!preg_match('/^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/', $email)) {
+    die("Erreur : Adresse email invalide !");
+}
 
 // Vérifier si l'utilisateur existe déjà
 $check_sql = "SELECT id FROM etudiant WHERE email = ?";
@@ -46,7 +47,7 @@ $result = $stmt->get_result();
 // Inscription en fonction du type
 if ($type === "etudiant") {
     // Insérer l'étudiant dans la table `utilisateur`
-    $sql = "INSERT INTO etudiant (nom, prénom, email, mot_de_passe, localité, statut) VALUES (?, ?, ?, ?, ?, 'en cours')";
+    $sql = "INSERT INTO etudiant (nom, prénom, email, mot_de_passe, localité ) VALUES (?, ?, ?, ?, ? )";
     $stmt = $conn->prepare($sql);
     $stmt->bind_param("sssss", $nom, $prenom, $email, $password, $localite);
     
