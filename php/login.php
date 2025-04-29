@@ -1,10 +1,10 @@
 <?php
 session_start();
 
-$servername = "localhost"; // Ou l'adresse de ton serveur MySQL
-$username = "root"; // Remplace par ton nom d'utilisateur MySQL
-$password = ""; // Remplace par ton mot de passe MySQL
-$database = "smi6"; // Remplace par le nom de ta base
+$servername = "localhost"; // Adresse du serveur MySQL
+$username = "root"; // Nom d'utilisateur MySQL
+$password = ""; // Mot de passe MySQL
+$database = "smi6"; // Nom de la base
 
 // Créer la connexion
 $conn = new mysqli($servername, $username, $password, $database);

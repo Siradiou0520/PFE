@@ -18,13 +18,16 @@ document.addEventListener("DOMContentLoaded", function () {
 function toggleMatricule() {
     const nouveau = document.getElementById('nouveau');
     const renouveau = document.getElementById('renouveau');
-    const carte = document.getElementById('carte-container');
-    
+    const carteContainer = document.getElementById('carte-container');
+    const carteInput = document.getElementById('carte');
     if (renouveau.checked) {
-        carte.classList.remove('hidden');
+        carteContainer.classList.remove('hidden');
+        carteInput.required = true;
         nouveau.checked = false;
     } else {
-        carte.classList.add('hidden');
+        carteContainer.classList.add('hidden');
+        carteInput.required = false;
+        carteInput.value = ""; // vider le champ pour éviter d'envoyer un fichier vide
     }
 }
 document.addEventListener("DOMContentLoaded", function () {

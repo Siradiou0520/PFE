@@ -3,12 +3,12 @@ session_start();
 error_reporting(E_ALL);
 ini_set('display_errors', 1);
 
-$servername = "localhost";
-$username = "root";
-$password = "";
-$database = "smi6";
+//Connexion à la base de données
+$servername = "localhost"; // Adresse du serveur MySQL
+$username = "root"; // Nom d'utilisateur MySQL
+$password = ""; // Mot de passe MySQL
+$database = "smi6"; // Nom de la base
 
-// Connexion à la base
 $conn = new mysqli($servername, $username, $password, $database);
 if ($conn->connect_error) {
     die("Échec de la connexion à la base de données : " . $conn->connect_error);
@@ -55,7 +55,7 @@ $result = $stmt->get_result();
                     <tr>
                         <th>Type de Document</th>
                         <th>Nom du Fichier</th>
-                        <th>Télécharger</th>
+                        <th>Consultation</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -63,7 +63,7 @@ $result = $stmt->get_result();
                         <tr>
                             <td><?= htmlspecialchars($doc['type_document']) ?></td>
                             <td><?= htmlspecialchars($doc['fichier_nom']) ?></td>
-                            <td><a href="<?= htmlspecialchars($doc['fichier_chemin']) ?>" target="_blank" class="btn btn-primary">Télécharger</a></td>
+                            <td><a href="<?= htmlspecialchars($doc['fichier_chemin']) ?>" target="_blank" class="btn btn-primary">Consulter</a></td>
                         </tr>
                     <?php endwhile; ?>
                 </tbody>

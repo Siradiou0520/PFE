@@ -41,15 +41,22 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $result = $stmt->get_result();
         $etudiant = $result->fetch_assoc();
 
+        // Récupérer l'email de l'agent de la même localité que l'étudiant
+        $sql_agent = "SELECT a.email FROM etudiant e JOIN agent a ON e.localité = a.localité ";
+        $stmt = $conn->prepare($sql_agent);
+        $stmt->execute();
+        $result = $stmt->get_result();
+        $agent = $result->fetch_assoc();
+
         // Définition du message
         $message = ($statut == "Acceptée") ? 
-            "✅ Félicitations ! Votre titre de séjour a été accepté." : 
-            "❌ Votre demande a été rejetée. Veuillez contacter l'administration.";
+            "✅ Félicitations ! Votre demande de titre de séjour a été accepté.\nVeuillez vous rendre dans la direction du service des étrangers de votre localité munis de votre numéro ou récipissé de demande, de vos documents légalisés et des frais de traitement de dossier après 20 jours." : 
+            "❌ Votre demande a été rejetée par manque de justificatifs.\n Veuillez renvoyer une nouvelle demande en remplissant convenablement les champs avec les fichiers demandés.";
 
         // Envoyer un e-mail à l’étudiant
         $to = $etudiant['email'];
         $subject = "Mise à jour de votre demande de titre de séjour";
-        $headers = "From: admin@titredesejour.com\r\n";
+        $headers = "From:" . $agent['email'] ."\r\n";
         $headers .= "Content-Type: text/html; charset=UTF-8\r\n";
         $body = "<p>Bonjour,<br><br>$message<br><br>Cordialement,<br>Service Administratif</p>";
 

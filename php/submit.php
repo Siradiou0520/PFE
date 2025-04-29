@@ -1,13 +1,13 @@
 <?php
-// Activer l'affichage des erreurs pour le debug
+// Affichage des erreurs pour le debug
 ini_set('display_errors', 1);
 error_reporting(E_ALL);
 
 // Connexion à la base de données
-$servername = "localhost";
-$username = "root";
-$password = "";
-$dbname = "smi6";
+$servername = "localhost"; // Adresse du serveur MySQL
+$username = "root"; // Nom d'utilisateur MySQL
+$password = ""; // Mot de passe MySQL
+$database = "smi6"; // Nom de la base
 
 $conn = new mysqli($servername, $username, $password, $dbname);
 if ($conn->connect_error) {
@@ -40,9 +40,6 @@ $stmt = $conn->prepare($check_sql);
 $stmt->bind_param("s", $email);
 $stmt->execute();
 $result = $stmt->get_result();
-/*if ($result->num_rows > 0) {
-    die("Cet e-mail est déjà utilisé.");
-}*/
 
 // Inscription en fonction du type
 if ($type === "etudiant") {
@@ -54,25 +51,6 @@ if ($type === "etudiant") {
     if (!$stmt->execute()) {
         die("Erreur lors de l'inscription de l'étudiant: " . $stmt->error);
     }
-
-    //$etudiant_id = $stmt->insert_id;
-
-    // Trouver un agent de la même localité
-    /*$sql = "SELECT id FROM agent WHERE localité = ? LIMIT 1";
-    $stmt = $conn->prepare($sql);
-    $stmt->bind_param("s", $localite);
-    $stmt->execute();
-    $result = $stmt->get_result();
-    $agent = $result->fetch_assoc();
-    $agent_id = $agent ? $agent['id'] : NULL;
-
-    // Insérer une demande de titre de séjour
-    $sql = "INSERT INTO demande (etudiant_id, statut, agent_id) VALUES (?, 'encours', ?)";
-    $stmt = $conn->prepare($sql);
-    $stmt->bind_param("ii", $etudiant_id, $agent_id);
-    if (!$stmt->execute()) {
-        die("Erreur lors de la création de la demande: " . $stmt->error);
-    }*/
      
     //Fermer la connexion
 $stmt->close();

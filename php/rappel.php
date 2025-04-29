@@ -13,10 +13,10 @@ require 'config.php'; // fichier de connexion MySQL
 error_reporting(E_ALL);
 ini_set('display_errors', 1);
 
-$servername = "localhost";
-$username = "root";
-$password = "";
-$database = "smi6";
+$servername = "localhost"; // Adresse du serveur MySQL
+$username = "root"; // Nom d'utilisateur MySQL
+$password = ""; // Mot de passe MySQL
+$database = "smi6"; // Nom de la base
 
 // Connexion à la base de données
 $conn = new mysqli($servername, $username, $password, $database);

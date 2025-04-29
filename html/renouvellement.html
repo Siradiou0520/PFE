@@ -12,8 +12,8 @@
         <form action="../php/premiere.php" method="post" enctype="multipart/form-data">
          <div class="labin">
          <label>Type de demande:</label>
-         <input class="type" type="radio" id="nouveau" name="demande" value="nouveau"  onclick="toggleMatricule()"> <span>Première demande</span>
-         <input class="type" type="radio" id="renouveau" name="demande" value="renouveau" required onclick="toggleMatricule()"> <span>Renouvellement</span>      
+         <input class="type" type="radio" id="nouveau" name="demande" value="premiere_demande" onclick="toggleMatricule()" checked> <span>Première demande</span>
+         <input class="type" type="radio" id="renouveau" name="demande" value="renouvellement" onclick="toggleMatricule()"> <span>Renouvellement</span>      
          </div>
          <div class="labin">
           <label for="nom">Nom:</label>
@@ -48,7 +48,7 @@
 
          <div id="carte-container" class="hidden">
             <label for="carte">Ancienne carte de séjour:</label>
-            <input type="file" id="carte" name="carte" required>
+            <input type="file" id="carte" name="carte" >
          </div>
 
          <label for="photo">Photo d'identité:</label>

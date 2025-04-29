@@ -4,29 +4,36 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Titre de séjour</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css">
     <link rel="stylesheet" href="../css/style.css">
 </head>
 <body>
-    <header>
+    <nav class="navbar navbar-expand-lg navbar-custom shadow-sm">
         <div class="container">
-            <div class="photo">
-                <img src="../photo/police.jpeg" alt="logo" class="log"> 
-            </div>
-            <div class="menu">
-                <a class="amenu aprop" href="#">A propos</a>
-                <a class="amenu insc" href="../html/inscrire.html" target="_blank">S'inscrire</a>
-                <a class="amenu con" href="../html/connecter.php">Se connecter</a>
+            <img src="../photo/logotitre.png" alt="logo" style="height: 40px; margin-right: 10px;">
+
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarAccueil">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+
+            <div class="collapse navbar-collapse justify-content-end" id="navbarAccueil">
+                <ul class="navbar-nav">
+                    <li class="nav-item"><a class="nav-link" href="#">À propos</a></li>
+                    <li class="nav-item"><a class="nav-link" href="../html/inscrire.html" target="_blank">S'inscrire</a></li>
+                    <li class="nav-item"><a class="nav-link" href="../html/connecter.php">Se connecter</a></li>
+                </ul>
             </div>
         </div>
-    </header>
+    </nav>
+
     <section class="note">
         <h1>Facilitez vos démarches administratives</h1>
         <p>Une plateforme simple et rapide pour demander et renouveler votre titre de séjour.</p>
         <div class="asec">
             <a href="../html/connecter.php" target="_blank">Commencer</a>
         </div>
-        
     </section>
+
     <section class="features">
         <div class="container">
             <div class="infos">
@@ -46,14 +53,16 @@
             </div>
         </div>
     </section>
-    
 
-    <footer>
-        <hr/>
-        <p>Titre de séjour pour étudiants étrangers </p>
-        <p>&copy;Copyright 2025</p>
-        <p>Tous droits réservés</p>
-    </footer>
-    
+    <!-- FOOTER -->
+  <footer class="bg-secondary text-light text-center py-3 shadow">
+    <div class="container">
+      <hr class="border-light" />
+      <p class="mb-1">Titre de séjour pour étudiants étrangers</p>
+      <p class="mb-0">&copy; 2025 - Tous droits réservés</p>
+    </div>
+  </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>

@@ -49,7 +49,7 @@ if (!$etudiant) {
 }
 
 // Récupérer les demandes de l'étudiant
-$sql_demandes = "SELECT D.date_de_dépôt, D.statut FROM demande D INNER JOIN etudiant E ON E.id = D.etudiant_id WHERE D.etudiant_id = ? ORDER BY date_de_dépôt DESC";
+$sql_demandes = "SELECT D.id, D.date_de_dépôt, D.statut FROM demande D INNER JOIN etudiant E ON E.id = D.etudiant_id WHERE D.etudiant_id = ? ORDER BY date_de_dépôt DESC";
 $stmt = $conn->prepare($sql_demandes);
 
 // Vérifier si la requête a été bien préparée
@@ -73,149 +73,155 @@ if (!$etudiant_json || !$demandes_json) {
 <!DOCTYPE html>
 <html lang="fr">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Tableau de bord étudiant</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            margin: 0;
-            padding: 0;
-            background-color: #f3efefd4;
-        }
-        header {
-            height: 70px;
-            background-color: rgb(231, 150, 43);
-            width: 100%;
-        }
-        .link {
-            text-align: center;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 20px;
-            padding: 22px;
-        }
-        a {
-            text-decoration: none;
-            color: white;
-            font-size: 1.2em;
-        }
-        main {
-            width: 70%;
-            height: 100vh;
-            margin: auto;
-            margin-top: 25px;
-            background-color: white;
-        }
-        h2 {
-            text-align: center;
-            color: rgb(22, 92, 233);
-            margin: 20px 0;
-        }
-        .notif {
-            background-color: rgb(231, 150, 43);
-            padding: 10px;
-            margin: 10px;
-            margin-bottom: 20px;
-            border-radius: 5px;
-            color: white;
-        }
-        h4 {
-            text-align: center;
-            margin-bottom: 13px;
-        }
-        table {
-            border-collapse: collapse;
-            margin-bottom: 50px;
-        }
-        .button {
-            display: flex;
-            justify-content: center;
-            gap: 7px;
-        }
-        .button a {
-            border-radius: 3px;
-            background-color:  rgb(22, 92, 233);
-            box-shadow: none !important;
-border: none;
-outline: none;
-color: white;
-padding: 5px;
-margin-bottom: 30px;
-margin-top: 20px;
-        }
-        section {
-            background-color: #f3efefd4;
-            margin: 10px;
-            padding: 5px;
-            
-        }
-        section h2 {
-            text-decoration: underline;
-        }
-        .requests-table h2 {
-            text-decoration: underline;
-        }
-        footer{
-    margin-top: 10%;
-    font-style: italic;
-    text-align: center;
-    color: azure;
-    background-color: darkgray;
-    margin-bottom: -50px;
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Tableau de bord étudiant</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+
+  <style>
+    html, body {
+  height: 100%;
+  margin: 0;
 }
-    </style>
 
+body {
+  display: flex;
+  flex-direction: column;
+  font-family: Arial, sans-serif;
+  background-color: #f3efefd4;
+}
+
+
+    
+    .navbar-custom {
+      background-color: #e7962b;
+      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    }
+
+    .navbar-custom a.nav-link {
+      color: #4a2b0c !important;
+      font-weight: 500;
+    }
+
+    .navbar-custom .navbar-brand {
+      color: white;
+      font-weight: bold;
+    }
+
+    main {
+      width: 70%;
+      margin: 25px auto;
+      background-color: white;
+      padding: 20px;
+      border-radius: 8px;
+      box-shadow: 0 0 10px rgba(0,0,0,0.05);
+      flex: 1;
+    }
+
+    h2 {
+      text-align: center;
+      color: rgb(22, 92, 233);
+      margin: 20px 0;
+    }
+
+    .notif {
+      background-color: #e7962b;
+      padding: 10px;
+      margin-bottom: 20px;
+      border-radius: 5px;
+      color: white;
+      text-align: center;
+    }
+
+    .button a {
+      border-radius: 4px;
+      background-color: rgb(22, 92, 233);
+      color: white;
+      padding: 6px 12px;
+      text-decoration: none;
+    }
+
+    footer {
+      background-color: #424242;
+    }
+
+    footer p {
+      font-style: italic;
+      font-size: 0.9rem;
+      margin-bottom: 0;
+    }
+
+    .info p {
+      font-size: 1rem;
+      margin-bottom: 6px;
+    }
+  </style>
 </head>
-<body>
+  
+  <nav class="navbar navbar-expand-lg navbar-custom">
+    <div class="container">
+      <p class="navbar-brand">Titre de Séjour</p>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+        <span class="navbar-toggler-icon"></span>
+      </button>
 
-<header>
-    <div class="link">
-        <a href="index.html">Accueil</a>
-        <a href="#profil">Mon Profil</a>
+      <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
+        <ul class="navbar-nav">
+          <li class="nav-item"><a class="nav-link" href="index.html">Accueil</a></li>
+          <li class="nav-item"><a class="nav-link" href="#profil">Mon Profil</a></li>
+        </ul>
+      </div>
     </div>
-</header>
+  </nav>
 
-<main>
-    <h2 id="welcome-message">Bienvenue sur votre tableau de bord</h2>
+  
+  <main>
+    <h2 id="welcome-message"></h2>
     <p class="notif" id="notification">Votre demande de titre de séjour est en cours de traitement.</p>
 
-    <h4><strong>Soumettez votre demande ici ⬇️</strong></h4>
-    <div class="button">
-        <a href="renouvellement.html">Demande</a>
+    <h4 class="text-center"><strong>Soumettez votre demande ici ⬇️</strong></h4>
+    <div class="button d-flex justify-content-center mb-4">
+      <a href="renouvellement.html">Demande</a>
     </div>
 
     <div class="requests-table">
-        <h2>Mes Demandes</h2>
-        <table>
-            <thead>
-                <tr>
-                    <th>Date de la demande</th>
-                    <th>Statut</th>
-            </thead>
-            <tbody id="requests-body"></tbody>
+      <h2>Mes Demandes</h2>
+      <div class="table-responsive-md p-3">
+        <table class="table table-striped table-bordered">
+          <thead>
+            <tr>
+              <th>Date de la demande</th>
+              <th>Statut</th>
+              <th>Récépissé</th>
+            </tr>
+          </thead>
+          <tbody id="requests-body"></tbody>
         </table>
+      </div>
     </div>
 
-    <section id="profil">
-        <h2>Mes Informations</h2>
-        <div class="info">
-            <p><strong>Nom: </strong> <span id="nom"></span></p>
-            <p><strong>Prénom: </strong> <span id="prenom"></span></p>
-            <p><strong>E-mail: </strong> <span id="email"></span></p>
-            <p><strong>Statut: </strong> Étudiant</p>
-        </div>
+    <section id="profil" class="mt-5">
+      <h2>Mes Informations</h2>
+      <div class="info">
+        <p><strong>Nom:</strong> <span id="nom"></span></p>
+        <p><strong>Prénom:</strong> <span id="prenom"></span></p>
+        <p><strong>E-mail:</strong> <span id="email"></span></p>
+        <p><strong>Statut:</strong> Étudiant</p>
+      </div>
     </section>
-</main>
+  </main>
 
-<footer>
-    <hr/>
-    <p>Titre de séjour pour étudiants étrangers</p>
-    <p>&copy; Copyright 2025</p>
-    <p>Tous droits réservés</p>
-</footer>
+  
+  <footer class="text-light text-center py-3 shadow">
+    <div class="container">
+      <hr class="border-light" />
+      <p class="mb-1">Titre de séjour pour étudiants étrangers</p>
+      <p class="mb-0">&copy; 2025 - Tous droits réservés</p>
+    </div>
+  </footer>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+
 
 <script>
     // Récupérer les données PHP en JSON
@@ -234,11 +240,20 @@ margin-top: 20px;
     const tbody = document.getElementById("requests-body");
     tbody.innerHTML = ""; // Vider le tableau
 
-    demandes.forEach(demande => {
+     demandes.forEach((demande) => {
         const row = document.createElement("tr");
+
+        // Si la demande est acceptée, afficher un lien vers le récépissé
+        let statutCell = demande.statut;
+        if (demande.statut === "Acceptée") {
+            statutCell = `<a href="../php/recepisse.php?id_demande=${demande.id}" target="_blank" class="recepisse"> 📄 Voir récépissé</a>`;
+
+        }
+
         row.innerHTML = `
             <td>${demande.date_de_dépôt}</td>
             <td>${demande.statut}</td>
+            <td>${statutCell}</td>
         `;
         tbody.appendChild(row);
     });
