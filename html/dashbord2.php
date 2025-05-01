@@ -5,12 +5,12 @@ session_start();
 error_reporting(E_ALL);
 ini_set('display_errors', 1);
 
+//Connexion à la base
 $servername = "localhost"; // Adresse du serveur MySQL
 $username = "root"; // Nom d'utilisateur MySQL
 $password = ""; // Mot de passe MySQL
 $database = "smi6"; // Nom de la base
 
-// Créer la connexion
 $conn = new mysqli($servername, $username, $password, $database);
 
 // Vérifier la connexion

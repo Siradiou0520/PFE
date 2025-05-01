@@ -1,6 +1,7 @@
 function toggleMatricule() {
     const etudiant = document.getElementById('etudiant');
     const agent = document.getElementById('agent');
+    const admin = document.getElementById('admin');
     const matriculeContainer = document.getElementById('matricule-container');
     
     if (agent.checked) {

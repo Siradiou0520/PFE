@@ -69,6 +69,25 @@ if (!preg_match('/^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/', $email)) {
             }
         }
 
+        // Vérifier si l'utilisateur est un admin
+        $queryAdmin = "SELECT * FROM admin WHERE email = ?";
+        $stmtAdmin = $conn->prepare($queryAdmin);
+        $stmtAdmin->bind_param('s', $email);
+        $stmtAdmin->execute();
+        $resultAdmin = $stmtAdmin->get_result();
+
+        if ($resultAdmin->num_rows > 0) {
+            $admin = $resultAdmin->fetch_assoc();
+            if (password_verify($password, $admin['mot_de_passe'])) {
+                $_SESSION['user_id'] = $admin['id'];
+                $_SESSION['role'] = 'admin';
+                header('Location: ../html/admin.php');
+                exit();
+            } else {
+                $error = "Mot de passe incorrect.";
+            }
+        }
+
         // Si l'utilisateur n'existe pas
         if (empty($error)) {
             $error = "Identifiants incorrects ou utilisateur inconnu.";
