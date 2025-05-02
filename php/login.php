@@ -43,7 +43,7 @@ if (!preg_match('/^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/', $email)) {
             if (password_verify($password, $etudiant['mot_de_passe'])) {
                 $_SESSION['user_id'] = $etudiant['id'];
                 $_SESSION['role'] = 'etudiant';
-                header('Location: http://localhost/PPFE/html/dashbord2.php');
+                header('Location: ../html/dashbord2.php');
                 exit();
             } else {
                 $error = "Mot de passe incorrect.";

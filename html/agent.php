@@ -133,11 +133,14 @@ $demandes = $stmt->get_result();
                                         <div class="td_a">
                                             <a href="../php/voir_documents.php?etudiant_id=<?= $demande['id'] ?>">Voir</a>
                                         </div>
-                                    </td>
-                                    <td class="d-flex flex-column gap-2">
+                                        <td class="d-flex flex-column gap-2" id="action-<?= $demande['demande_id'] ?>">
+                                        <?php if ($demande['statut'] === 'en cours') { ?>
                                         <button onclick="updateStatus(<?= $demande['demande_id'] ?>, 'Acceptée')">Accepter</button>
                                         <button onclick="updateStatus(<?= $demande['demande_id'] ?>, 'Rejetée')">Rejeter</button>
-                                    </td>
+                                        <?php } else { ?>
+                                        <span class="text-success fw-bold">Action réalisée</span>
+                                        <?php } ?>
+                                        </td>
                                 </tr>
                             <?php } ?>
                             </tbody>
@@ -174,6 +177,16 @@ $demandes = $stmt->get_result();
 <script>
 function updateStatus(demandeId, statut) {
     if (confirm("Voulez-vous vraiment " + (statut === 'Acceptée' ? "accepter" : "rejeter") + " cette demande ?")) {
+
+        // Désactivation immédiate des boutons pour éviter double clic
+        const actionCell = document.getElementById("action-" + demandeId);
+        const buttons = actionCell.querySelectorAll("button");
+        buttons.forEach(btn => {
+            btn.disabled = true;
+            btn.style.opacity = 0.5;
+            btn.style.cursor = "not-allowed";
+        });
+
         fetch('../php/update_status.php', {
             method: 'POST',
             headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
@@ -182,13 +195,20 @@ function updateStatus(demandeId, statut) {
         .then(response => response.json())
         .then(data => {
             if (data.success) {
+                // Mise à jour du statut
                 document.getElementById("statut-" + demandeId).innerText = statut;
+
+                // Remplacer les boutons par un message
+                actionCell.innerHTML = '<span class="text-success fw-bold">Action réalisée</span>';
+
                 alert("Statut mis à jour avec succès !");
             } else {
                 alert("Erreur: " + data.message);
             }
         })
-        .catch(error => console.error('Erreur:', error));
+        .catch(error => {
+            console.error('Erreur:', error);
+            });
     }
 }
 </script>
